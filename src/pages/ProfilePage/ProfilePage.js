@@ -45,16 +45,21 @@ function ProfilePage() {
       {loading && <p>{t('Loading')}...</p>}
       {!loading && user && (
         <div>
-          <div className={styles.header}>
-            <div className={styles.bannerContainer}>
-              <img
-                src={user.profile?.banner}
-                alt="User banner"
-                height={460}
-                className={styles.banner}
-              />
-              <div className={styles.bannerOverlay} />
-            </div>
+          <div
+            className={styles.header}
+            style={{ height: user.profile?.banner ? '460px' : 'auto' }}
+          >
+            {user.profile?.banner && (
+              <div className={styles.bannerContainer}>
+                <img
+                  src={user.profile?.banner}
+                  alt="User banner"
+                  height={460}
+                  className={styles.banner}
+                />
+                <div className={styles.bannerOverlay} />
+              </div>
+            )}
 
             <div className={styles.headerContent}>
               <h1 className={styles.username}>{user.username}</h1>
