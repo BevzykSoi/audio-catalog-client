@@ -1,0 +1,72 @@
+.container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 130px;
+  background-color: #000;
+  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cover {
+  display: block;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.controlBtn {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+}
+
+.controlBtn:hover {
+  cursor: pointer;
+}
+
+.controlBtn:disabled {
+  color: rgba(255, 255, 255, 0.3);
+  cursor: default;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time {
+}
+
+.volume {
+}
+
+.slider {
+  width: 500px;
+}
+
+.sliderBackground {
+}
+
+.sliderFill {
+}
+
+.sliderThumb {
+}

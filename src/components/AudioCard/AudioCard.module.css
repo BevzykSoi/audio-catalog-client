@@ -1,0 +1,76 @@
+.card {
+  border-radius: 10px;
+  background-color: var(--audio-card-bg);
+  padding: 10px;
+  position: relative;
+  max-width: 150px;
+}
+
+.cover {
+  width: 130px;
+  height: 130px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 130px;
+  text-overflow: ellipsis;
+}
+
+.author {
+  font-size: 14px;
+  font-weight: 400;
+  color: inherit;
+  text-decoration: none;
+}
+
+.playBtn {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0c93f4;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  border: none;
+  color: #fff;
+  display: none;
+}
+
+.card:hover .playBtn {
+  display: block;
+}
+
+.playBtn:hover {
+  cursor: pointer;
+  background-color: #1f9ef9;
+}
+
+.likeBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: var(--like-btn);
+}
+
+.likeBtn:hover {
+  cursor: pointer;
+  color: var(--like-btn-hover);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
