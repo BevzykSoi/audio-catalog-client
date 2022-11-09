@@ -72,7 +72,7 @@ function SettingsPage() {
         <input
           type="file"
           placeholder="Avatar"
-          name="picture"
+          name="avatar"
           id="avatarInput"
           accept="image/*"
           className={styles.imageInput}
@@ -99,7 +99,7 @@ function SettingsPage() {
         <input
           type="file"
           placeholder="Banner"
-          name="picture"
+          name="banner"
           id="bannerInput"
           accept="image/*"
           className={styles.imageInput}
