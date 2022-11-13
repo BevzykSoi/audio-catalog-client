@@ -8,6 +8,7 @@ import * as authSelectors from 'redux/auth/auth.selectors';
 import * as usersService from 'services/users.service';
 import CreatedAudios from './CreatedAudios';
 import LikedAudios from './LikedAudios';
+import History from './History';
 import AudioSection from 'components/AudioSection/AudioSection';
 import Container from 'components/Container/Container';
 
@@ -97,6 +98,9 @@ function ProfilePage() {
             </AudioSection>
             <AudioSection title={t('Liked audios')}>
               <LikedAudios userId={userId} />
+            </AudioSection>
+            <AudioSection title={t('History')}>
+              <History userId={userId} />
             </AudioSection>
           </Container>
         </div>

@@ -32,14 +32,16 @@ function AudioCard({
         <Link to={`${urls.profile}/${author._id}`} className={styles.author}>
           by {author.username}
         </Link>
-        <button
-          type="button"
-          onClick={() => onLike(_id)}
-          disabled={!isLoggedIn}
-          className={styles.likeBtn}
-        >
-          {isLiked ? <AiFillHeart size={32} /> : <AiOutlineHeart size={32} />}
-        </button>
+        {isLoggedIn && (
+          <button
+            type="button"
+            onClick={() => onLike(_id)}
+            disabled={!isLoggedIn}
+            className={styles.likeBtn}
+          >
+            {isLiked ? <AiFillHeart size={32} /> : <AiOutlineHeart size={32} />}
+          </button>
+        )}
       </div>
       <button
         type="button"
