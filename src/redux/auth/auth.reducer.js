@@ -36,6 +36,15 @@ const loading = createReducer(false, {
   [actions.getProfileError]: () => false,
 });
 
+const error = createReducer('', {
+  [actions.registerError]: (_, { payload }) => payload,
+  [actions.loginError]: (_, { payload }) => payload,
+  [actions.getProfileError]: (_, { payload }) => payload,
+  [actions.registerRequest]: () => '',
+  [actions.loginRequest]: () => '',
+  [actions.getProfileRequest]: () => '',
+});
+
 export default persistCombineReducers(
   {
     key: 'auth',
@@ -46,5 +55,6 @@ export default persistCombineReducers(
     user,
     token,
     loading,
+    error,
   }
 );

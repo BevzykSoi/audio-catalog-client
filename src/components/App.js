@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { routes } from 'config/router';
 import Navbar from 'components/Navbar/Navbar';
 import { getProfile } from 'redux/auth/auth.operations';
+import * as authSelectors from 'redux/auth/auth.selectors';
 import PrivateRoute from 'utils/PrivateRoute';
 import PublicRoute from 'utils/PublicRoute';
 import AudioPlayer from './AudioPlayer/AudioPlayer';
@@ -16,11 +17,19 @@ function App() {
   const { i18n } = useTranslation();
 
   const { audioIndex, playlist } = useSelector((state) => state.audios);
+  const user = useSelector(authSelectors.getUser);
 
   useEffect(() => {
     dispatch(getProfile());
-    i18n.changeLanguage('ua');
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    i18n.changeLanguage(user.profile.language);
+  }, [user]);
 
   return (
     <div className="App">

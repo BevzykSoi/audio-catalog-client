@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './RegisterPage.module.css';
 import { register } from 'redux/auth/auth.operations';
 import * as authSelectors from 'redux/auth/auth.selectors';
+import Alert from 'components/Alert/Alert';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required(),
@@ -22,6 +23,7 @@ function RegisterPage() {
   const { t } = useTranslation();
 
   const loading = useSelector(authSelectors.getLoading);
+  const error = useSelector(authSelectors.getError);
 
   const formik = useFormik({
     initialValues: {
@@ -66,6 +68,9 @@ function RegisterPage() {
           onBlur={formik.handleBlur}
           className={styles.input}
         />
+
+        {loading && <p>Loading...</p>}
+        {error && <Alert>{error}</Alert>}
 
         <button type="submit" className={styles.btn} disabled={loading}>
           {t('Register')}

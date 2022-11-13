@@ -7,6 +7,7 @@ import styles from './SettingsPage.module.css';
 import * as authOperations from 'redux/auth/auth.operations';
 import * as authSelectors from 'redux/auth/auth.selectors';
 import * as usersService from 'services/users.service';
+import Alert from 'components/Alert/Alert';
 
 function SettingsPage() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function SettingsPage() {
 
   const user = useSelector(authSelectors.getUser);
   const loading = useSelector(authSelectors.getLoading);
+  const error = useSelector(authSelectors.getError);
 
   const formik = useFormik({
     initialValues: {
@@ -40,28 +42,46 @@ function SettingsPage() {
   const [avatarFile, setAvatarFile] = useState(null);
   const [bannerFile, setBannerFile] = useState(null);
 
+  const [settingsLoading, setSettingsLoading] = useState(false);
+  const [settingsError, setSettingsError] = useState('');
+
   function updateAvatar(e) {
     e.preventDefault();
 
+    setSettingsLoading(true);
     const formData = new FormData(e.target);
-    usersService.updateAvatar(user._id, formData).then((res) => {
-      dispatch(authOperations.getProfile());
-    });
+    usersService
+      .updateAvatar(user._id, formData)
+      .then(() => {
+        dispatch(authOperations.getProfile());
+      })
+      .catch((err) => setSettingsError(err.message))
+      .finally(() => setSettingsLoading(false));
   }
 
   function updateBanner(e) {
     e.preventDefault();
 
+    setSettingsLoading(true);
     const formData = new FormData(e.target);
-    usersService.updateBanner(user._id, formData).then((res) => {
-      dispatch(authOperations.getProfile());
-    });
+    usersService
+      .updateBanner(user._id, formData)
+      .then(() => {
+        dispatch(authOperations.getProfile());
+      })
+      .catch((err) => setSettingsError(err.message))
+      .finally(() => setSettingsLoading(false));
   }
 
   function saveInfo(values) {
-    usersService.updateProfile(user._id, values).then((res) => {
-      dispatch(authOperations.getProfile());
-    });
+    setSettingsLoading(true);
+    usersService
+      .updateProfile(user._id, values)
+      .then(() => {
+        dispatch(authOperations.getProfile());
+      })
+      .catch((err) => setSettingsError(err.message))
+      .finally(() => setSettingsLoading(false));
   }
 
   return (
@@ -157,6 +177,9 @@ function SettingsPage() {
             onBlur={formik.handleBlur}
           />
         </div>
+
+        {(loading || settingsLoading) && <p>Loading...</p>}
+        {(error || settingsError) && <Alert>{error || settingsError}</Alert>}
 
         <button type="submit" className={styles.btn} disabled={loading}>
           {t('Save')}
