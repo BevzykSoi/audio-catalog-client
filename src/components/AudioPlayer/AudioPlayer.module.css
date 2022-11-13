@@ -4,7 +4,7 @@
   right: 0;
   bottom: 0;
   height: 130px;
-  background-color: #000;
+  background-color: var(--navbar-bg);
   padding: 10px 40px;
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@
 .controlBtn {
   background-color: transparent;
   border: none;
-  color: #fff;
+  color: var(--color-text);
 }
 
 .controlBtn:hover {
@@ -42,7 +42,7 @@
 }
 
 .controlBtn:disabled {
-  color: rgba(255, 255, 255, 0.3);
+  opacity: 0.3;
   cursor: default;
 }
 
@@ -53,6 +53,7 @@
 }
 
 .time {
+  color: var(--color-text);
 }
 
 .volume {
