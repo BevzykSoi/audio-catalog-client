@@ -11,6 +11,7 @@ export const register = (data) => (dispatch) => {
     .register(data)
     .then((res) => {
       setToken(res.token);
+      document.querySelector('html').dataset.theme = res.user.profile?.theme;
       dispatch(actions.registerSuccess(res));
     })
     .catch((error) => {
@@ -25,6 +26,7 @@ export const login = (data) => (dispatch) => {
     .login(data)
     .then((res) => {
       setToken(res.token);
+      document.querySelector('html').dataset.theme = res.user.profile?.theme;
       dispatch(actions.loginSuccess(res));
     })
     .catch((error) => {
