@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { BsX } from 'react-icons/bs';
 
 import styles from './UploadPage.module.css';
 import * as audiosService from 'services/audios.service';
@@ -57,6 +58,7 @@ function UploadPage() {
     () => (audio ? URL.createObjectURL(audio) : ''),
     [audio]
   );
+  const [genres, setGenres] = useState([]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -64,6 +66,7 @@ function UploadPage() {
     getDuration(audio).then((duration) => {
       const formData = new FormData(e.target);
       formData.append('duration', duration);
+      formData.append('genres', genres.join(', '));
 
       setLoading(true);
 
@@ -124,7 +127,7 @@ function UploadPage() {
           onBlur={formik.handleBlur}
           className={styles.input}
         />
-        <input
+        {/* <input
           type="text"
           placeholder={`${t('Genres')} (Rock, Pop, Classical)`}
           name="genres"
@@ -132,7 +135,49 @@ function UploadPage() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           className={styles.input}
-        />
+        /> */}
+        <div className={styles.genres}>
+          {genres.map((genre) => (
+            <button
+              type="button"
+              key={genre}
+              className={styles.genre}
+              onClick={() =>
+                setGenres((prev) => prev.filter((item) => item !== genre))
+              }
+            >
+              <span>{genre}</span>
+              <BsX size={14} />
+            </button>
+          ))}
+        </div>
+        <select
+          className={styles.input}
+          onChange={(e) =>
+            e.target.value !== '' &&
+            setGenres((prev) => [...prev, e.target.value])
+          }
+        >
+          <option value="">Select genres</option>
+          {[
+            'Pop',
+            'Rock',
+            'Jazz',
+            'Traditional',
+            'Hip-Hop',
+            'Electronic',
+            'Folk',
+            'Indi',
+            'Country',
+            'Classical',
+          ]
+            .filter((genre) => !genres.includes(genre))
+            .map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+        </select>
 
         {loading && <p>Loading...</p>}
 
