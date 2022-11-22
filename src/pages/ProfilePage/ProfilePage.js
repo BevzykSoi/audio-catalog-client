@@ -83,7 +83,7 @@ function ProfilePage() {
           </div>
 
           <Container>
-            <AudioSection title={t('Genres')}>
+            {/* <AudioSection title={t('Genres')}>
               <div className={styles.tags}>
                 {user.profile?.genres?.map((genre) => (
                   <span key={genre} className={styles.tagItem}>
@@ -91,7 +91,7 @@ function ProfilePage() {
                   </span>
                 ))}
               </div>
-            </AudioSection>
+            </AudioSection> */}
 
             <AudioSection title={t('Uploaded audios')}>
               <CreatedAudios userId={userId} />
