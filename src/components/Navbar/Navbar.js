@@ -7,6 +7,7 @@ import styles from './Navbar.module.css';
 import { urls } from 'utils/constants';
 import * as authSelectors from 'redux/auth/auth.selectors';
 import * as authOperations from 'redux/auth/auth.operations';
+import { useClickOutside } from 'hooks/useClickOutside';
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -17,6 +18,10 @@ function Navbar() {
 
   const user = useSelector(authSelectors.getUser);
   const isLoggedIn = useSelector(authSelectors.isLoggedIn);
+
+  useClickOutside(`.${styles.dropdownContainer}`, (e) => {
+    setDropdownVisible(false);
+  });
 
   function logout() {
     dispatch(authOperations.logout());
