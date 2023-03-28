@@ -52,4 +52,11 @@ export const routes = [
     isPrivate: true,
     isPublicOnly: false,
   },
+  {
+    key: 'playlists',
+    path: urls.playlists,
+    Component: lazy(() => import('pages/PlaylistsPage/PlaylistsPage')),
+    isPrivate: true,
+    isPublicOnly: false,
+  },
 ];

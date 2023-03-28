@@ -52,6 +52,11 @@ function Navbar() {
             </Link>
           )}
           {isLoggedIn && (
+            <Link to={urls.playlists} className={styles.navLink}>
+              {t('Playlists')}
+            </Link>
+          )}
+          {isLoggedIn && (
             <Link to="/upload" className={styles.navLink}>
               {t('Upload')}
             </Link>

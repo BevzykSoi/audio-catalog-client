@@ -6,4 +6,5 @@ export const urls = {
   profile: '/profile',
   upload: '/upload',
   settings: '/settings',
+  playlists: '/playlists',
 };
