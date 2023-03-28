@@ -13,7 +13,7 @@ function LikedAudios({ userId }) {
 
     userService
       .getLikedAudios(userId)
-      .then((res) => setAudios(res))
+      .then((res) => setAudios(res.items))
       .finally(() => setLoading(false));
   }
 

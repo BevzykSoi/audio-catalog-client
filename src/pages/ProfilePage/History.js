@@ -13,7 +13,7 @@ function History({ userId }) {
 
     userService
       .getUserHistory(userId)
-      .then((res) => setAudios(res))
+      .then((res) => setAudios(res.items))
       .finally(() => setLoading(false));
   }
 

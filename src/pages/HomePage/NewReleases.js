@@ -16,7 +16,7 @@ function NewReleases() {
 
     audiosService
       .getNew()
-      .then((res) => setAudios(res))
+      .then((res) => setAudios(res.items))
       .finally(() => setLoading(false));
   }
 

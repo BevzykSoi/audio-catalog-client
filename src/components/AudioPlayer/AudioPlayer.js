@@ -11,6 +11,7 @@ import styles from './AudioPlayer.module.css';
 import * as audiosActions from 'redux/audios/audios.actions';
 
 const audioElem = new Audio();
+audioElem.volume = 0.1;
 
 async function getDuration(file) {
   const url = URL.createObjectURL(file);
@@ -71,6 +72,8 @@ function AudioPlayer({ audioIndex, playlist }) {
     audioElem.addEventListener('ended', () => {
       next();
     });
+
+    setVolume(audioElem.volume);
   }, []);
 
   useEffect(() => {

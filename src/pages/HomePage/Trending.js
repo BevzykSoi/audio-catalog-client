@@ -16,7 +16,7 @@ function Trending() {
 
     audiosService
       .getTop()
-      .then((res) => setAudios(res))
+      .then((res) => setAudios(res.items))
       .finally(() => setLoading(false));
   }
 
