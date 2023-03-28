@@ -8,6 +8,7 @@ import { urls } from 'utils/constants';
 import * as authSelectors from 'redux/auth/auth.selectors';
 import * as authOperations from 'redux/auth/auth.operations';
 import { useClickOutside } from 'hooks/useClickOutside';
+import Notifications from './Notifications';
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function Navbar() {
   const user = useSelector(authSelectors.getUser);
   const isLoggedIn = useSelector(authSelectors.isLoggedIn);
 
-  useClickOutside(`.${styles.dropdownContainer}`, (e) => {
+  useClickOutside(`.${styles.dropdownContainer}`, () => {
     setDropdownVisible(false);
   });
 
@@ -68,6 +69,8 @@ function Navbar() {
               {t('Login')}
             </Link>
           )}
+
+          {isLoggedIn && <Notifications />}
 
           {isLoggedIn && (
             <div className={styles.dropdownContainer}>
