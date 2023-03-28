@@ -34,6 +34,13 @@
     "Rock": "Rock",
     "Pop": "Pop",
     "Classical": "Classical",
-    "History": "History"
+    "History": "History",
+    "Playlists": "Playlists",
+    "liked your audio": "liked your audio",
+    "started following you": "started following you",
+    "commented your audio": "commented your audio",
+    "m": "m",
+    "h": "h",
+    "ago": "ago"
   }
 }

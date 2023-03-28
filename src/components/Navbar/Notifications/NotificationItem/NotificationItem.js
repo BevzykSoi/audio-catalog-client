@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import styles from './NotificationItem.module.css';
 
@@ -17,6 +18,8 @@ function NotificationItem({ id, type, user, target }) {
 }
 
 function AudioLikeNotification({ id, user, audio }) {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.container}>
       <img
@@ -31,12 +34,14 @@ function AudioLikeNotification({ id, user, audio }) {
           <Link to="/" className={styles.userLink}>
             {user.username}
           </Link>{' '}
-          liked your audio{' '}
+          {t('liked your audio')}{' '}
           <Link to="/" className={styles.audioLink}>
             {audio.name}
           </Link>
         </p>
-        <span className={styles.time}>3m ago</span>
+        <span className={styles.time}>
+          3{t('m')} {t('ago')}
+        </span>
       </div>
 
       <img
@@ -51,6 +56,8 @@ function AudioLikeNotification({ id, user, audio }) {
 }
 
 function UserFollowNotification({ id, user }) {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.container}>
       <img
@@ -65,15 +72,19 @@ function UserFollowNotification({ id, user }) {
           <Link to="/" className={styles.userLink}>
             {user.username}
           </Link>{' '}
-          started following you
+          {t('started following you')}
         </p>
-        <span className={styles.time}>3m ago</span>
+        <span className={styles.time}>
+          3{t('m')} {t('ago')}
+        </span>
       </div>
     </div>
   );
 }
 
 function CommentNotification({ id, user, comment }) {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.container}>
       <img
@@ -88,7 +99,7 @@ function CommentNotification({ id, user, comment }) {
           <Link to="/" className={styles.userLink}>
             {user.username}
           </Link>{' '}
-          commented your audio{' '}
+          {t('commented your audio')}{' '}
           <Link to="/" className={styles.audioLink}>
             {comment.audio.name}
           </Link>
@@ -100,7 +111,9 @@ function CommentNotification({ id, user, comment }) {
               : comment.text}
           </i>
         </p>
-        <span className={styles.time}>3m ago</span>
+        <span className={styles.time}>
+          3{t('m')} {t('ago')}
+        </span>
       </div>
 
       <img
