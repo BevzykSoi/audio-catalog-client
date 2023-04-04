@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding-top: 50px;
+}
+
+.cover {
+  display: block;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.info {
+  width: 100%;
+}
+
+.name {
+  font-size: 38px;
+  margin-bottom: 8px;
+}
+
+.author {
+  margin-bottom: 12px;
+}
+
+.author > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.author > a:hover {
+  text-decoration: underline;
+}
+
+.genresList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

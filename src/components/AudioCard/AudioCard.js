@@ -26,7 +26,7 @@ function AudioCard({
         className={styles.cover}
       />
       <h4 className={styles.name} title={name}>
-        {name}
+        <Link to={`${urls.audios}/${_id}`}>{name}</Link>
       </h4>
       <div className={styles.footer}>
         <Link to={`${urls.profile}/${author._id}`} className={styles.author}>

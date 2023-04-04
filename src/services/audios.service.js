@@ -29,3 +29,11 @@ export function listen(id) {
 export function toggleLike(id) {
   return axios.patch(`/audios/${id}/like`).then((res) => res.data);
 }
+
+export function getAudio(id) {
+  return axios.get(`/audios/${id}`).then((res) => res.data);
+}
+
+export function getAudioComments(id) {
+  return axios.get(`/audios/${id}/comments`).then((res) => res.data);
+}

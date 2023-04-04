@@ -23,6 +23,15 @@
   text-overflow: ellipsis;
 }
 
+.name > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.name > a:hover {
+  text-decoration: underline;
+}
+
 .author {
   font-size: 14px;
   font-weight: 400;

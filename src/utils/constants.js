@@ -7,4 +7,5 @@ export const urls = {
   upload: '/upload',
   settings: '/settings',
   playlists: '/playlists',
+  audios: '/audios',
 };

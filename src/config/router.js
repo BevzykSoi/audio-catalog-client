@@ -59,4 +59,11 @@ export const routes = [
     isPrivate: true,
     isPublicOnly: false,
   },
+  {
+    key: 'audioPage',
+    path: `${urls.audios}/:audioId`,
+    Component: lazy(() => import('pages/AudioPage/AudioPage')),
+    isPrivate: true,
+    isPublicOnly: false,
+  },
 ];
