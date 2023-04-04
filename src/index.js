@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'styles/index.css';
 import 'config/axios';
 import 'config/i18n';
+import 'config/socket';
 import { store, persistor } from 'redux/store';
 import App from 'components/App';
 
