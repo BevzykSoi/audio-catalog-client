@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactPaginate from 'react-paginate';
 
 import * as audiosService from 'services/audios.service';
 import AudioSection from 'components/AudioSection/AudioSection';
@@ -8,6 +9,8 @@ import AudioListHorizontal from 'components/AudioListHorizontal/AudioListHorizon
 function NewReleases() {
   const [audios, setAudios] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pagesCount, setPagesCount] = useState(1);
+  const [activePage, setActivePage] = useState(0);
 
   const { t } = useTranslation();
 
@@ -15,12 +18,15 @@ function NewReleases() {
     setLoading(true);
 
     audiosService
-      .getNew()
-      .then((res) => setAudios(res.items))
+      .getNew(activePage + 1)
+      .then((res) => {
+        setAudios(res.items);
+        setPagesCount(res.pagesCount);
+      })
       .finally(() => setLoading(false));
   }
 
-  useEffect(fetchAudios, []);
+  useEffect(fetchAudios, [activePage]);
 
   function like(audioId) {
     audiosService.toggleLike(audioId).then((res) => {
@@ -34,8 +40,21 @@ function NewReleases() {
     <div>
       <AudioSection title={t('New Releases')}>
         {loading && <p>{t('Loading')}...</p>}
-        {!loading && audios.length > 0 && (
-          <AudioListHorizontal audios={audios} onLike={like} />
+        {audios.length > 0 && (
+          <>
+            <AudioListHorizontal audios={audios} onLike={like} />
+            <ReactPaginate
+              initialPage={activePage}
+              breakLabel="..."
+              nextLabel=">"
+              previousLabel="<"
+              pageRangeDisplayed={5}
+              pageCount={pagesCount}
+              disableInitialCallback
+              className="react-paginate"
+              onPageChange={({ selected }) => setActivePage(selected)}
+            />
+          </>
         )}
       </AudioSection>
     </div>
