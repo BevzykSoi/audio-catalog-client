@@ -1,7 +1,13 @@
 import axios from 'axios';
 
-export function getNew() {
-  return axios.get('/audios/new').then((res) => res.data);
+export function getNew(page) {
+  return axios
+    .get('/audios/new', {
+      params: {
+        page,
+      },
+    })
+    .then((res) => res.data);
 }
 
 export function getTop() {

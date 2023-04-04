@@ -31,3 +31,7 @@ export function getLikedAudios(id) {
 export function followToggle(id) {
   return axios.patch(`/users/${id}/follow`).then((res) => res.data);
 }
+
+export function getUserPlaylists(id) {
+  return axios.get(`/users/${id}/playlists`).then((res) => res.data);
+}
