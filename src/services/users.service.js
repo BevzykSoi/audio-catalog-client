@@ -35,3 +35,7 @@ export function followToggle(id) {
 export function getUserPlaylists(id) {
   return axios.get(`/users/${id}/playlists`).then((res) => res.data);
 }
+
+export function getUserNotifications(id) {
+  return axios.get(`/users/${id}/notifications`).then((res) => res.data);
+}

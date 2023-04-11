@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styles from './NotificationItem.module.css';
+import { urls } from 'utils/constants';
 
 function NotificationItem({ id, type, user, target }) {
   switch (type) {
@@ -23,7 +24,7 @@ function AudioLikeNotification({ id, user, audio }) {
   return (
     <div className={styles.container}>
       <img
-        src={user.avatarUrl}
+        src={user.profile.avatarUrl}
         alt={user.username}
         className={styles.avatar}
         width={38}
@@ -31,11 +32,11 @@ function AudioLikeNotification({ id, user, audio }) {
       />
       <div className={styles.info}>
         <p className={styles.text}>
-          <Link to="/" className={styles.userLink}>
+          <Link to={`${urls.profile}/${user._id}`} className={styles.userLink}>
             {user.username}
           </Link>{' '}
           {t('liked your audio')}{' '}
-          <Link to="/" className={styles.audioLink}>
+          <Link to={`${urls.audios}/${audio._id}`} className={styles.audioLink}>
             {audio.name}
           </Link>
         </p>
@@ -45,7 +46,7 @@ function AudioLikeNotification({ id, user, audio }) {
       </div>
 
       <img
-        src={audio.posterUrl}
+        src={audio.coverUrl}
         alt={audio.name}
         className={styles.audioPoster}
         width={40}
@@ -61,7 +62,7 @@ function UserFollowNotification({ id, user }) {
   return (
     <div className={styles.container}>
       <img
-        src={user.avatarUrl}
+        src={user.profile.avatarUrl}
         alt={user.username}
         className={styles.avatar}
         width={38}
@@ -69,7 +70,7 @@ function UserFollowNotification({ id, user }) {
       />
       <div className={styles.info}>
         <p className={styles.text}>
-          <Link to="/" className={styles.userLink}>
+          <Link to={`${urls.profile}/${user._id}`} className={styles.userLink}>
             {user.username}
           </Link>{' '}
           {t('started following you')}
@@ -88,7 +89,7 @@ function CommentNotification({ id, user, comment }) {
   return (
     <div className={styles.container}>
       <img
-        src={user.avatarUrl}
+        src={user.profile.avatarUrl}
         alt={user.username}
         className={styles.avatar}
         width={38}
@@ -96,11 +97,14 @@ function CommentNotification({ id, user, comment }) {
       />
       <div className={styles.info}>
         <p className={styles.text}>
-          <Link to="/" className={styles.userLink}>
+          <Link to={`${urls.profile}/${user._id}`} className={styles.userLink}>
             {user.username}
           </Link>{' '}
           {t('commented your audio')}{' '}
-          <Link to="/" className={styles.audioLink}>
+          <Link
+            to={`${urls.audios}/${comment.audio._id}`}
+            className={styles.audioLink}
+          >
             {comment.audio.name}
           </Link>
         </p>
@@ -117,7 +121,7 @@ function CommentNotification({ id, user, comment }) {
       </div>
 
       <img
-        src={comment.audio.posterUrl}
+        src={comment.audio.coverUrl}
         alt={comment.audio.name}
         className={styles.audioPoster}
         width={40}

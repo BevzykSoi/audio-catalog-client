@@ -61,7 +61,7 @@ function Comments({ audioId }) {
       </form>
 
       {comments.map((comment) => (
-        <div>
+        <div key={comment._id}>
           <div>
             <h4>{comment.owner.username}</h4>
             <p>{new Date(comment.createdAt).toLocaleString('uk')}</p>

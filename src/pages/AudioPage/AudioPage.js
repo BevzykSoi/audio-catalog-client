@@ -6,6 +6,7 @@ import { getAudio } from 'services/audios.service';
 import styles from './AudioPage.module.css';
 import { urls } from 'utils/constants';
 import Comments from './Comments/Comments';
+import AddToPlaylist from './AddToPlaylist/AddToPlaylist';
 
 function AudioPage() {
   const { audioId } = useParams();
@@ -51,12 +52,7 @@ function AudioPage() {
               <p>{audio.listenCount} прослуховувань</p>
               <p>{audio.usersLiked.length} лайків</p>
 
-              <div>
-                <span>Додати до списку відтворення</span>
-                <select>
-                  <option>Test1</option>
-                </select>
-              </div>
+              <AddToPlaylist audio={audio} />
             </div>
           </div>
           <Comments audioId={audio._id} />

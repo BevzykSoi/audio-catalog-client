@@ -43,3 +43,15 @@ export function getAudio(id) {
 export function getAudioComments(id) {
   return axios.get(`/audios/${id}/comments`).then((res) => res.data);
 }
+
+export function addToPlaylist(audioId, playlistId) {
+  return axios
+    .patch(`/audios/${audioId}/playlist/add`, { playlistId })
+    .then((res) => res.data);
+}
+
+export function removeFromPlaylist(audioId, playlistId) {
+  return axios
+    .patch(`/audios/${audioId}/playlist/remove`, { playlistId })
+    .then((res) => res.data);
+}

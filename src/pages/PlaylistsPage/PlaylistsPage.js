@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 
 import styles from './PlaylistsPage.module.css';
 import * as usersService from 'services/users.service';
 import * as playlistsService from 'services/playlists.services';
 import * as authSelectors from 'redux/auth/auth.selectors';
+import { urls } from 'utils/constants';
 
 const validationSchema = yup.object().shape({
   name: yup.string().min(3).required(),
@@ -66,8 +68,12 @@ function PlaylistsPage() {
 
       <h2>Списки відтворення</h2>
       {playlists.map((playlist) => (
-        <div>
-          <h4>{playlist.name}</h4>
+        <div key={playlist._id}>
+          <h4>
+            <Link to={`${urls.playlists}/${playlist._id}`}>
+              {playlist.name}
+            </Link>
+          </h4>
         </div>
       ))}
     </div>
