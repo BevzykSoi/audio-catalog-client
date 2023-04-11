@@ -2,7 +2,8 @@ import {
   MdOutlineNotifications,
   MdOutlineNotificationsActive,
 } from 'react-icons/md';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { socket } from 'config/socket';
 
 import styles from './Notifications.module.css';
 import { useClickOutside } from 'hooks/useClickOutside';
@@ -15,6 +16,7 @@ const posterUrl =
 
 function Notifications() {
   const [visible, setVisible] = useState(false);
+  const [notificationItemsList, setNotificationItemsList] = useState([]);
 
   useClickOutside(`.${styles.container}`, () => {
     setVisible(false);
@@ -23,6 +25,16 @@ function Notifications() {
   function toggle() {
     setVisible((prev) => !prev);
   }
+  function onNewNotification(notification) {
+    setNotificationItemsList(notification);
+  }
+
+  useEffect(() => {
+    socket.on('new_notification', onNewNotification);
+    return () => {
+      socket.off('new_notification', onNewNotification);
+    };
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -32,28 +44,16 @@ function Notifications() {
 
       {visible && (
         <div className={styles.notifications}>
-          <NotificationItem
-            id="1"
-            type="AUDIO_LIKE"
-            user={{ _id: '1', username: 'user1', avatarUrl }}
-            target={{ _id: '1', name: 'audio1', posterUrl }}
-          />
-          <NotificationItem
-            id="1"
-            type="USER_FOLLOW"
-            user={{ _id: '1', username: 'user1', avatarUrl }}
-            target={{ _id: '2', name: 'auth_user', avatarUrl }}
-          />
-          <NotificationItem
-            id="1"
-            type="AUDIO_COMMENT"
-            user={{ _id: '1', username: 'user1', avatarUrl }}
-            target={{
-              _id: '1',
-              text: 'Excepteur qui Lorem qui duis aliqua. Cupidatat eiusmod ut tempor excepteur anim qui anim non duis consectetur. Sint dolor adipisicing do consequat laborum magna velit ex dolore.',
-              audio: { id: '1', name: 'audio1', posterUrl },
-            }}
-          />
+          {notificationItemsList.map((item) => {
+            return (
+              <NotificationItem
+                id={item.id}
+                type={item.type}
+                user={item.user}
+                target={item.target}
+              />
+            );
+          })}
         </div>
       )}
     </div>
