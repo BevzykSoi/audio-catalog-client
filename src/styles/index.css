@@ -11,8 +11,8 @@
   --color-text: #fff;
   --navbar-bg: #000;
   --audio-card-bg: #5f5f5f;
-  --playlist-card-bg: #cbcbcb;
-  --playlist-card-bg-hover: #d1d1d1;
+  --playlist-card-bg: #5f5f5f;
+  --playlist-card-bg-hover: #575757;
   --like-btn: #dbdbdb;
   --like-btn-hover: #fff;
 }
