@@ -83,3 +83,27 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.card:hover .removeBtn {
+  display: flex;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: var(--like-btn);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border: none;
+  color: #fff;
+  display: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.removeBtn:hover {
+  background-color: var(--like-btn-hover);
+}

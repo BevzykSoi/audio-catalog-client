@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai';
 import { BiPlay } from 'react-icons/bi';
 
 import styles from './AudioCard.module.css';
@@ -51,8 +51,12 @@ function PlaylistAudioCard({
       >
         <BiPlay size={55} />
       </button>
-      <button type="button" onClick={() => onRemove(_id)}>
-        Remove
+      <button
+        type="button"
+        className={styles.removeBtn}
+        onClick={() => onRemove(_id)}
+      >
+        <AiOutlineClose size={20} />
       </button>
     </div>
   );
