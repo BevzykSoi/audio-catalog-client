@@ -4,7 +4,7 @@ import {
 } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 import { socket } from 'config/socket';
-
+import { v4 as uuidv4 } from 'uuid';
 import styles from './Notifications.module.css';
 import { useClickOutside } from 'hooks/useClickOutside';
 import NotificationItem from './NotificationItem';
@@ -26,7 +26,7 @@ function Notifications() {
     setVisible((prev) => !prev);
   }
   function onNewNotification(notification) {
-    setNotificationItemsList(notification);
+    setNotificationItemsList((prev) => [...prev, notification]);
   }
 
   useEffect(() => {
@@ -47,6 +47,7 @@ function Notifications() {
           {notificationItemsList.map((item) => {
             return (
               <NotificationItem
+                key={uuidv4()}
                 id={item.id}
                 type={item.type}
                 user={item.user}
