@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ReactPaginate from 'react-paginate';
 
 import * as audiosService from 'services/audios.service';
 import AudioSection from 'components/AudioSection/AudioSection';
 import AudioListHorizontal from 'components/AudioListHorizontal/AudioListHorizontal';
+import Pagination from 'components/Pagination/Pagination';
 
 function NewReleases() {
   const [audios, setAudios] = useState([]);
@@ -43,16 +43,10 @@ function NewReleases() {
         {audios.length > 0 && (
           <>
             <AudioListHorizontal audios={audios} onLike={like} />
-            <ReactPaginate
+            <Pagination
               initialPage={activePage}
-              breakLabel="..."
-              nextLabel=">"
-              previousLabel="<"
-              pageRangeDisplayed={5}
               pageCount={pagesCount}
-              disableInitialCallback
-              className="react-paginate"
-              onPageChange={({ selected }) => setActivePage(selected)}
+              setActivePage={setActivePage}
             />
           </>
         )}
