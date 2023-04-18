@@ -11,6 +11,8 @@
   height: 130px;
   border-radius: 10px;
   margin-bottom: 8px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .name {
