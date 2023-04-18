@@ -10,6 +10,7 @@ import * as authSelectors from 'redux/auth/auth.selectors';
 import PrivateRoute from 'utils/PrivateRoute';
 import PublicRoute from 'utils/PublicRoute';
 import AudioPlayer from './AudioPlayer/AudioPlayer';
+import { socket } from 'config/socket';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ function App() {
     }
 
     i18n.changeLanguage(user.profile.language);
+
+    socket.emit('join room', user._id);
   }, [user]);
 
   return (
