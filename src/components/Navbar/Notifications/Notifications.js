@@ -47,7 +47,7 @@ function Notifications() {
             return (
               <NotificationItem
                 key={item._id}
-                id={item.id}
+                id={item._id}
                 type={item.type}
                 user={item.user}
                 target={item.target}
