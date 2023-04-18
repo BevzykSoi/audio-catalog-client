@@ -25,6 +25,8 @@ function AudioPage() {
 
   return (
     <Container>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
       {audio && (
         <div>
           <div className={styles.header}>

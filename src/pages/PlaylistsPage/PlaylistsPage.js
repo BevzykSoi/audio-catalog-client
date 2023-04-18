@@ -55,6 +55,8 @@ function PlaylistsPage() {
 
   return (
     <Container>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
       <h2>Створити список відтворення</h2>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <input
