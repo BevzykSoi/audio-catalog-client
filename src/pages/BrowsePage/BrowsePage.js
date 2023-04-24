@@ -6,12 +6,15 @@ import AudioListHorizontal from 'components/AudioListHorizontal/AudioListHorizon
 import AudioSection from 'components/AudioSection/AudioSection';
 import * as audiosService from 'services/audios.service';
 import Container from 'components/Container/Container';
+import Pagination from 'components/Pagination/Pagination';
 
 function BrowsePage() {
   const [q, setQ] = useState('');
   const [oldQ, setOldQ] = useState('');
   const [audios, setAudios] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pagesCount, setPagesCount] = useState(1);
 
   const { t } = useTranslation();
 
@@ -22,8 +25,12 @@ function BrowsePage() {
     setLoading(true);
 
     audiosService
-      .search(q)
-      .then((res) => setAudios(res.items))
+      .search(q, page + 1)
+      .then((res) => {
+        setAudios(res.items);
+        setPage(res.page);
+        setPagesCount(res.pagesCount);
+      })
       .finally(() => setLoading(false));
   }
 
@@ -56,6 +63,14 @@ function BrowsePage() {
           {loading && <p>{t('Loading')}...</p>}
           <AudioListHorizontal audios={audios} onLike={like} />
         </AudioSection>
+      )}
+
+      {audios.length > 0 && (
+        <Pagination
+          activePage={page - 1}
+          pageCount={pagesCount}
+          setActivePage={setPage}
+        />
       )}
     </Container>
   );

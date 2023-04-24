@@ -20,11 +20,12 @@ export function getTop(page) {
     .then((res) => res.data);
 }
 
-export function search(q) {
+export function search(q, page) {
   return axios
     .get('/audios', {
       params: {
         q,
+        page,
       },
     })
     .then((res) => res.data);
