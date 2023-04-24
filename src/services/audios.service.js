@@ -10,8 +10,14 @@ export function getNew(page) {
     .then((res) => res.data);
 }
 
-export function getTop() {
-  return axios.get('/audios/top').then((res) => res.data);
+export function getTop(page) {
+  return axios
+    .get('/audios/top', {
+      params: {
+        page,
+      },
+    })
+    .then((res) => res.data);
 }
 
 export function search(q) {

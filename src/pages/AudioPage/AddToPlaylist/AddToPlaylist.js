@@ -11,6 +11,7 @@ function AddToPlaylist({ audio }) {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [added, setAdded] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -29,12 +30,24 @@ function AddToPlaylist({ audio }) {
   function onPlaylistSelect(e) {
     const playlistId = e.target.value;
 
-    audiosService.addToPlaylist(audio._id, playlistId).then(console.log);
+    setLoading(true);
+
+    audiosService
+      .addToPlaylist(audio._id, playlistId)
+      .then(() => {
+        setAdded(true);
+      })
+      .catch(setError)
+      .finally(() => setLoading(false));
   }
 
   return (
     <div>
-      <select defaultValue="default" onChange={onPlaylistSelect}>
+      <select
+        defaultValue="default"
+        onChange={onPlaylistSelect}
+        disabled={loading}
+      >
         <option disabled value="default">
           Додати до списку відтворення
         </option>
@@ -44,6 +57,8 @@ function AddToPlaylist({ audio }) {
           </option>
         ))}
       </select>
+      {error && <p>{error.message}</p>}
+      {added && !loading && !error && <p>Аудіо успішно додано</p>}
     </div>
   );
 }

@@ -126,14 +126,20 @@ function SettingsPage() {
           onChange={(e) => setBannerFile(e.target.files[0])}
         />
         <label htmlFor="bannerInput" className={styles.bannerLabel}>
-          <img
-            src={
-              bannerFile ? URL.createObjectURL(bannerFile) : user.profile.banner
-            }
-            width={250}
-            height={100}
-            alt="Profile banner"
-          />
+          {bannerFile || user.profile.banner ? (
+            <img
+              src={
+                bannerFile
+                  ? URL.createObjectURL(bannerFile)
+                  : user.profile.banner
+              }
+              width={250}
+              height={100}
+              alt="Profile banner"
+            />
+          ) : (
+            <p>Select image</p>
+          )}
         </label>
 
         <button type="submit" className={styles.btn}>

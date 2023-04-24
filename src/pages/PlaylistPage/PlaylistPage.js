@@ -6,6 +6,7 @@ import * as playlistsServices from 'services/playlists.services';
 import AudioSection from 'components/AudioSection/AudioSection';
 import AudioListHorizontal from 'components/AudioListHorizontal/AudioListHorizontal';
 import * as audiosService from 'services/audios.service';
+import Container from 'components/Container/Container';
 
 function PlaylistPage() {
   const { playlistId } = useParams();
@@ -48,7 +49,7 @@ function PlaylistPage() {
   }
 
   return (
-    <div>
+    <Container>
       {loading && <p>Loading...</p>}
       {error && <p>{error.message}</p>}
       {playlist && (
@@ -63,7 +64,7 @@ function PlaylistPage() {
           </AudioSection>
         </>
       )}
-    </div>
+    </Container>
   );
 }
 

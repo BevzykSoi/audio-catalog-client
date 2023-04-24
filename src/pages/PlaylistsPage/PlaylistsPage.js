@@ -9,6 +9,8 @@ import * as usersService from 'services/users.service';
 import * as playlistsService from 'services/playlists.services';
 import * as authSelectors from 'redux/auth/auth.selectors';
 import { urls } from 'utils/constants';
+import Container from 'components/Container/Container';
+import PlaylistCard from './PlaylistCard/PlaylistCard';
 
 const validationSchema = yup.object().shape({
   name: yup.string().min(3).required(),
@@ -52,31 +54,32 @@ function PlaylistsPage() {
   }, [user]);
 
   return (
-    <div>
+    <Container>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
       <h2>Створити список відтворення</h2>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <input
           type="text"
           name="name"
           placeholder="Name"
+          className={styles.input}
           value={formik.values.name}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
         />
-        <button type="submit">Створити</button>
+        <button type="submit" className={styles.btn} disabled={loading}>
+          Створити
+        </button>
       </form>
 
       <h2>Списки відтворення</h2>
-      {playlists.map((playlist) => (
-        <div key={playlist._id}>
-          <h4>
-            <Link to={`${urls.playlists}/${playlist._id}`}>
-              {playlist.name}
-            </Link>
-          </h4>
-        </div>
-      ))}
-    </div>
+      <div className={styles.playlists}>
+        {playlists.map((playlist) => (
+          <PlaylistCard key={playlist._id} {...playlist} />
+        ))}
+      </div>
+    </Container>
   );
 }
 

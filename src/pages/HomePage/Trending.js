@@ -4,10 +4,13 @@ import { useTranslation } from 'react-i18next';
 import * as audiosService from 'services/audios.service';
 import AudioSection from 'components/AudioSection/AudioSection';
 import AudioListHorizontal from 'components/AudioListHorizontal/AudioListHorizontal';
+import Pagination from 'components/Pagination/Pagination';
 
 function Trending() {
   const [audios, setAudios] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [pagesCount, setPagesCount] = useState(1);
+  const [activePage, setActivePage] = useState(0);
 
   const { t } = useTranslation();
 
@@ -15,8 +18,11 @@ function Trending() {
     setLoading(true);
 
     audiosService
-      .getTop()
-      .then((res) => setAudios(res.items))
+      .getTop(activePage + 1)
+      .then((res) => {
+        setAudios(res.items);
+        setPagesCount(res.pagesCount);
+      })
       .finally(() => setLoading(false));
   }
 
@@ -35,7 +41,14 @@ function Trending() {
       <AudioSection title={t('Trending')}>
         {loading && <p>{t('Loading')}...</p>}
         {!loading && audios.length > 0 && (
-          <AudioListHorizontal audios={audios} onLike={like} />
+          <>
+            <AudioListHorizontal audios={audios} onLike={like} />
+            <Pagination
+              initialPage={activePage}
+              pageCount={pagesCount}
+              setActivePage={setActivePage}
+            />
+          </>
         )}
       </AudioSection>
     </div>

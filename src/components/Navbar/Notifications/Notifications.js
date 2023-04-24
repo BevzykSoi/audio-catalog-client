@@ -2,11 +2,15 @@ import {
   MdOutlineNotifications,
   MdOutlineNotificationsActive,
 } from 'react-icons/md';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
+import { socket } from 'config/socket';
 import styles from './Notifications.module.css';
 import { useClickOutside } from 'hooks/useClickOutside';
 import NotificationItem from './NotificationItem';
+import * as usersService from 'services/users.service';
+import * as authSelectors from 'redux/auth/auth.selectors';
 
 const avatarUrl =
   'https://res.cloudinary.com/bevzyksoi/image/upload/v1668016321/sbcf-default-avatar_dykn6i.png';
@@ -15,6 +19,9 @@ const posterUrl =
 
 function Notifications() {
   const [visible, setVisible] = useState(false);
+  const [notificationItemsList, setNotificationItemsList] = useState([]);
+
+  const user = useSelector(authSelectors.getUser);
 
   useClickOutside(`.${styles.container}`, () => {
     setVisible(false);
@@ -23,6 +30,26 @@ function Notifications() {
   function toggle() {
     setVisible((prev) => !prev);
   }
+  function onNewNotification(notification) {
+    setNotificationItemsList((prev) => [notification, ...prev]);
+  }
+
+  useEffect(() => {
+    socket.on('new_notification', onNewNotification);
+    return () => {
+      socket.off('new_notification', onNewNotification);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+
+    usersService
+      .getUserNotifications(user._id)
+      .then((data) => setNotificationItemsList(data.reverse()));
+  }, [user]);
 
   return (
     <div className={styles.container}>
@@ -32,28 +59,21 @@ function Notifications() {
 
       {visible && (
         <div className={styles.notifications}>
-          <NotificationItem
-            id="1"
-            type="AUDIO_LIKE"
-            user={{ _id: '1', username: 'user1', avatarUrl }}
-            target={{ _id: '1', name: 'audio1', posterUrl }}
-          />
-          <NotificationItem
-            id="1"
-            type="USER_FOLLOW"
-            user={{ _id: '1', username: 'user1', avatarUrl }}
-            target={{ _id: '2', name: 'auth_user', avatarUrl }}
-          />
-          <NotificationItem
-            id="1"
-            type="AUDIO_COMMENT"
-            user={{ _id: '1', username: 'user1', avatarUrl }}
-            target={{
-              _id: '1',
-              text: 'Excepteur qui Lorem qui duis aliqua. Cupidatat eiusmod ut tempor excepteur anim qui anim non duis consectetur. Sint dolor adipisicing do consequat laborum magna velit ex dolore.',
-              audio: { id: '1', name: 'audio1', posterUrl },
-            }}
-          />
+          {notificationItemsList.length > 0 ? (
+            notificationItemsList.map((item) => {
+              return (
+                <NotificationItem
+                  key={item._id}
+                  id={item._id}
+                  type={item.type}
+                  user={item.user}
+                  target={item.target}
+                />
+              );
+            })
+          ) : (
+            <p>No notifications</p>
+          )}
         </div>
       )}
     </div>
