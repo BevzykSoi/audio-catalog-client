@@ -3,11 +3,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 130px;
   background-color: var(--navbar-bg);
   padding: 10px 40px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -23,6 +21,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 8px;
+}
+
+.title {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.title a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
 }
 
 .controls {
@@ -70,4 +80,16 @@
 }
 
 .sliderThumb {
+}
+
+.volumeBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.volumeLabel {
+  display: inline-block;
+  width: 55px;
+  text-align: center;
 }

@@ -9,6 +9,8 @@ import {
 
 import styles from './AudioPlayer.module.css';
 import * as audiosActions from 'redux/audios/audios.actions';
+import { Link } from 'react-router-dom';
+import { urls } from 'utils/constants';
 
 const audioElem = new Audio();
 audioElem.volume = 0.1;
@@ -130,6 +132,15 @@ function AudioPlayer({ audioIndex, playlist }) {
       )}
 
       <div className={styles.main}>
+        <p className={styles.title}>
+          <Link to={`${urls.audios}/${activeAudio._id}`}>
+            {activeAudio.name}
+          </Link>{' '}
+          by{' '}
+          <Link to={`${urls.profile}/${activeAudio.author._id}`}>
+            {activeAudio.author.username}
+          </Link>
+        </p>
         <div className={styles.controls}>
           <button
             type="button"
@@ -178,13 +189,16 @@ function AudioPlayer({ audioIndex, playlist }) {
         </div>
       </div>
 
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={volume * 100}
-        onChange={(e) => (audioElem.volume = e.target.valueAsNumber / 100)}
-      />
+      <div className={styles.volumeBox}>
+        <span className={styles.volumeLabel}>{Math.round(volume * 100)}%</span>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={volume * 100}
+          onChange={(e) => (audioElem.volume = e.target.valueAsNumber / 100)}
+        />
+      </div>
     </div>
   );
 }
