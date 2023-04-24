@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import moment from 'moment';
 
 import { routes } from 'config/router';
 import Navbar from 'components/Navbar/Navbar';
@@ -16,6 +17,10 @@ function App() {
   const dispatch = useDispatch();
 
   const { i18n } = useTranslation();
+
+  useEffect(() => {
+    moment.locale(i18n.language);
+  }, [i18n.language]);
 
   const { audioIndex, playlist } = useSelector((state) => state.audios);
   const user = useSelector(authSelectors.getUser);

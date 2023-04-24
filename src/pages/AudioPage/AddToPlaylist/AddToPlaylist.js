@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import * as usersService from 'services/users.service';
 import * as audiosService from 'services/audios.service';
 import * as authSelectors from 'redux/auth/auth.selectors';
+import styles from '../AudioPage.module.css';
 
 function AddToPlaylist({ audio }) {
   const user = useSelector(authSelectors.getUser);
@@ -44,6 +45,7 @@ function AddToPlaylist({ audio }) {
   return (
     <div>
       <select
+        className={styles.input}
         defaultValue="default"
         onChange={onPlaylistSelect}
         disabled={loading}

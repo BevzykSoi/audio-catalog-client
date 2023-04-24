@@ -1,0 +1,65 @@
+.container {
+  margin-top: 12px;
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+.form {
+  margin-bottom: 12px;
+}
+
+.input {
+  font: inherit;
+  resize: vertical;
+  padding: 12px 16px;
+  background-color: #5f5f5f;
+  color: #fff;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #d6d6d6;
+}
+
+.input::placeholder {
+  color: #d6d6d6;
+}
+
+.btn {
+  background-color: #5f5f5f;
+  border: none;
+  padding: 12px 16px;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #676767;
+}
+
+.comment {
+  margin-bottom: 12px;
+}
+
+.commentHeader {
+}
+
+.commentAuthor {
+  display: inline;
+  margin-right: 8px;
+}
+
+.commentTime {
+  display: inline;
+}
+
+.commentText {
+}

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import moment from 'moment';
 
 import * as audiosService from 'services/audios.service';
 import * as commentsService from 'services/comments.service';
+import styles from './Comments.module.css';
 
 const validationSchema = yup.object().shape({
   text: yup.string().max(200).required(),
@@ -47,26 +49,33 @@ function Comments({ audioId }) {
   }, [audioId]);
 
   return (
-    <div>
-      <h3>Comments</h3>
-      <form onSubmit={formik.handleSubmit}>
+    <div className={styles.container}>
+      <h3 className={styles.title}>Comments</h3>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <textarea
+          className={styles.input}
           placeholder="Write your comment"
           name="text"
           value={formik.values.text}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
         />
-        <button type="submit">Надіслати</button>
+        <button type="submit" className={styles.btn}>
+          Надіслати
+        </button>
       </form>
 
+      {loading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
       {comments.map((comment) => (
-        <div key={comment._id}>
-          <div>
-            <h4>{comment.owner.username}</h4>
-            <p>{new Date(comment.createdAt).toLocaleString('uk')}</p>
+        <div key={comment._id} className={styles.comment}>
+          <div className={styles.commentHeader}>
+            <h4 className={styles.commentAuthor}>{comment.owner.username}</h4>
+            <p className={styles.commentTime}>
+              {moment(comment.createdAt).fromNow()}
+            </p>
           </div>
-          <p>{comment.text}</p>
+          <p className={styles.commentText}>{comment.text}</p>
         </div>
       ))}
     </div>
