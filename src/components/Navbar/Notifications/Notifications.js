@@ -68,6 +68,7 @@ function Notifications() {
                   type={item.type}
                   user={item.user}
                   target={item.target}
+                  createdAt={item.createdAt}
                 />
               );
             })

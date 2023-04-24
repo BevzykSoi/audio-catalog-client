@@ -1,25 +1,44 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import moment from 'moment';
 
 import styles from './NotificationItem.module.css';
 import { urls } from 'utils/constants';
 
-function NotificationItem({ id, type, user, target }) {
+function NotificationItem({ id, type, user, target, createdAt }) {
   switch (type) {
     case 'AUDIO_LIKE':
-      return AudioLikeNotification({ id, user, audio: target });
+      return (
+        <AudioLikeNotification
+          id={id}
+          user={user}
+          audio={target}
+          createdAt={createdAt}
+        />
+      );
     case 'USER_FOLLOW':
-      return UserFollowNotification({ id, user });
+      return (
+        <UserFollowNotification id={id} user={user} createdAt={createdAt} />
+      );
     case 'AUDIO_COMMENT':
-      return CommentNotification({ id, user, comment: target });
+      return (
+        <CommentNotification
+          id={id}
+          user={user}
+          comment={target}
+          createdAt={createdAt}
+        />
+      );
 
     default:
       break;
   }
 }
 
-function AudioLikeNotification({ id, user, audio }) {
+function AudioLikeNotification({ id, user, audio, createdAt }) {
   const { t } = useTranslation();
+
+  console.log(createdAt);
 
   return (
     <div className={styles.container}>
@@ -40,9 +59,7 @@ function AudioLikeNotification({ id, user, audio }) {
             {audio.name}
           </Link>
         </p>
-        <span className={styles.time}>
-          3{t('m')} {t('ago')}
-        </span>
+        <span className={styles.time}>{moment(createdAt).fromNow()}</span>
       </div>
 
       <img
@@ -56,7 +73,7 @@ function AudioLikeNotification({ id, user, audio }) {
   );
 }
 
-function UserFollowNotification({ id, user }) {
+function UserFollowNotification({ id, user, createdAt }) {
   const { t } = useTranslation();
 
   return (
@@ -75,15 +92,13 @@ function UserFollowNotification({ id, user }) {
           </Link>{' '}
           {t('started following you')}
         </p>
-        <span className={styles.time}>
-          3{t('m')} {t('ago')}
-        </span>
+        <span className={styles.time}>{moment(createdAt).fromNow()}</span>
       </div>
     </div>
   );
 }
 
-function CommentNotification({ id, user, comment }) {
+function CommentNotification({ id, user, comment, createdAt }) {
   const { t } = useTranslation();
 
   return (
@@ -115,9 +130,7 @@ function CommentNotification({ id, user, comment }) {
               : comment.text}
           </i>
         </p>
-        <span className={styles.time}>
-          3{t('m')} {t('ago')}
-        </span>
+        <span className={styles.time}>{moment(createdAt).fromNow()}</span>
       </div>
 
       <img
