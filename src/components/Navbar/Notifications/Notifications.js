@@ -1,7 +1,4 @@
-import {
-  MdOutlineNotifications,
-  MdOutlineNotificationsActive,
-} from 'react-icons/md';
+import { MdOutlineNotifications } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -11,11 +8,6 @@ import { useClickOutside } from 'hooks/useClickOutside';
 import NotificationItem from './NotificationItem';
 import * as usersService from 'services/users.service';
 import * as authSelectors from 'redux/auth/auth.selectors';
-
-const avatarUrl =
-  'https://res.cloudinary.com/bevzyksoi/image/upload/v1668016321/sbcf-default-avatar_dykn6i.png';
-const posterUrl =
-  'https://res.cloudinary.com/dzlxh7hbv/image/upload/v1680002501/d3mhrz4ntfr3sq3brdjf.png';
 
 function Notifications() {
   const [visible, setVisible] = useState(false);
