@@ -52,7 +52,7 @@ function BrowsePage() {
       </form>
 
       {audios.length > 0 && (
-        <AudioSection title={`Results for ${oldQ}`}>
+        <AudioSection title={`${t('Results for')} ${oldQ}`}>
           {loading && <p>{t('Loading')}...</p>}
           <AudioListHorizontal audios={audios} onLike={like} />
         </AudioSection>

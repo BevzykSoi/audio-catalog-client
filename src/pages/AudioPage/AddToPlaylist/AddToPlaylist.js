@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import * as usersService from 'services/users.service';
 import * as audiosService from 'services/audios.service';
@@ -13,6 +14,8 @@ function AddToPlaylist({ audio }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [added, setAdded] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!user) {
@@ -51,7 +54,7 @@ function AddToPlaylist({ audio }) {
         disabled={loading}
       >
         <option disabled value="default">
-          Додати до списку відтворення
+          {t('Add to playlist')}
         </option>
         {playlists.map((playlist) => (
           <option key={playlist._id} value={playlist._id}>
@@ -60,7 +63,7 @@ function AddToPlaylist({ audio }) {
         ))}
       </select>
       {error && <p>{error.message}</p>}
-      {added && !loading && !error && <p>Аудіо успішно додано</p>}
+      {added && !loading && !error && <p>{t('Audio successfully added')}</p>}
     </div>
   );
 }

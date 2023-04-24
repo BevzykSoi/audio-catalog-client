@@ -86,7 +86,7 @@ function UploadPage() {
           <input
             type="file"
             accept="image/*"
-            placeholder="Cover"
+            placeholder={t('Cover')}
             name="cover"
             id="audioCoverInput"
             className={styles.coverInput}
@@ -111,7 +111,7 @@ function UploadPage() {
           <input
             type="file"
             accept="audio/*"
-            placeholder="Audio"
+            placeholder={t('Audio')}
             name="audio"
             onChange={(e) => setAudio(e.target.files[0])}
           />
@@ -158,7 +158,7 @@ function UploadPage() {
             setGenres((prev) => [...prev, e.target.value])
           }
         >
-          <option value="">Select genres</option>
+          <option value="">{t('Select genres')}</option>
           {[
             'Pop',
             'Rock',
@@ -179,7 +179,7 @@ function UploadPage() {
             ))}
         </select>
 
-        {loading && <p>Loading...</p>}
+        {loading && <p>{t('Loading')}...</p>}
 
         <button type="submit" className={styles.btn} disabled={loading}>
           {t('Upload')}

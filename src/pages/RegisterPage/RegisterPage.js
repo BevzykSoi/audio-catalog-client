@@ -69,7 +69,7 @@ function RegisterPage() {
           className={styles.input}
         />
 
-        {loading && <p>Loading...</p>}
+        {loading && <p>{t('Loading')}...</p>}
         {error && <Alert>{error}</Alert>}
 
         <button type="submit" className={styles.btn} disabled={loading}>

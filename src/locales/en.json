@@ -41,6 +41,19 @@
     "commented your audio": "commented your audio",
     "m": "m",
     "h": "h",
-    "ago": "ago"
+    "ago": "ago",
+    "Comments": "Comments",
+    "Write your comment": "Write your comment",
+    "Send": "Send",
+    "listeners": "listeners",
+    "likes": "likes",
+    "Add to playlist": "Add to playlist",
+    "Audio successfully added": "Audio successfully added",
+    "Results for": "Results for",
+    "Create playlist": "Create playlist",
+    "Create": "Create",
+    "Banner": "Banner",
+    "Select image": "Select image",
+    "Select genres": "Select genres"
   }
 }

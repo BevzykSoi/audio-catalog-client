@@ -41,6 +41,19 @@
     "commented your audio": "прокоментував(-ла) ваше аудіо",
     "m": "хв",
     "h": "год",
-    "ago": "тому"
+    "ago": "тому",
+    "Comments": "Коментарі",
+    "Write your comment": "Напишіть свій коментар",
+    "Send": "Надіслати",
+    "listeners": "прослуховувань",
+    "likes": "лайків",
+    "Add to playlist": "Додати до списку відтворення",
+    "Audio successfully added": "Аудіо успішно додано",
+    "Results for": "Результати для",
+    "Create playlist": "Створити список відтворення",
+    "Create": "Створити",
+    "Banner": "Банер",
+    "Select image": "Виберіть зображення",
+    "Select genres": "Виберіть жанри"
   }
 }

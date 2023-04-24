@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 import * as audiosService from 'services/audios.service';
 import * as commentsService from 'services/comments.service';
@@ -15,6 +16,8 @@ function Comments({ audioId }) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -50,22 +53,22 @@ function Comments({ audioId }) {
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Comments</h3>
+      <h3 className={styles.title}>{t('Comments')}</h3>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <textarea
           className={styles.input}
-          placeholder="Write your comment"
+          placeholder={t('Write your comment')}
           name="text"
           value={formik.values.text}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
         />
         <button type="submit" className={styles.btn}>
-          Надіслати
+          {t('Send')}
         </button>
       </form>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p>{t('Loading')}...</p>}
       {error && <p>{error.message}</p>}
       {comments.map((comment) => (
         <div key={comment._id} className={styles.comment}>

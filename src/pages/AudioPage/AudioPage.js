@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Container from 'components/Container/Container';
 import { getAudio } from 'services/audios.service';
@@ -14,6 +15,8 @@ function AudioPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     setLoading(true);
 
@@ -25,7 +28,7 @@ function AudioPage() {
 
   return (
     <Container>
-      {loading && <p>Loading...</p>}
+      {loading && <p>{t('Loading')}...</p>}
       {error && <p>{error.message}</p>}
       {audio && (
         <div>
@@ -51,8 +54,12 @@ function AudioPage() {
                 ))}
               </div>
 
-              <p>{audio.listenCount} прослуховувань</p>
-              <p>{audio.usersLiked.length} лайків</p>
+              <p>
+                {audio.listenCount} {t('listeners')}
+              </p>
+              <p>
+                {audio.usersLiked.length} {t('likes')}
+              </p>
 
               <AddToPlaylist audio={audio} />
             </div>

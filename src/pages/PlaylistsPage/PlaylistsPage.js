@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import styles from './PlaylistsPage.module.css';
 import * as usersService from 'services/users.service';
@@ -22,6 +22,7 @@ function PlaylistsPage() {
   const [error, setError] = useState(null);
 
   const user = useSelector(authSelectors.getUser);
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -55,9 +56,9 @@ function PlaylistsPage() {
 
   return (
     <Container>
-      {loading && <p>Loading...</p>}
+      {loading && <p>{t('Loading')}...</p>}
       {error && <p>{error.message}</p>}
-      <h2>Створити список відтворення</h2>
+      <h2>{t('Create playlist')}</h2>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <input
           type="text"
@@ -69,11 +70,11 @@ function PlaylistsPage() {
           onChange={formik.handleChange}
         />
         <button type="submit" className={styles.btn} disabled={loading}>
-          Створити
+          {t('Create')}
         </button>
       </form>
 
-      <h2>Списки відтворення</h2>
+      <h2>{t('Playlists')}</h2>
       <div className={styles.playlists}>
         {playlists.map((playlist) => (
           <PlaylistCard key={playlist._id} {...playlist} />

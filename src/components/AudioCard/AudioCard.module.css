@@ -94,12 +94,12 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background-color: var(--like-btn);
+  background-color: var(--audio-card-bg);
   border-radius: 50%;
   width: 35px;
   height: 35px;
   border: none;
-  color: #fff;
+  color: var(--like-btn);
   display: none;
   cursor: pointer;
   justify-content: center;
@@ -107,5 +107,5 @@
 }
 
 .removeBtn:hover {
-  background-color: var(--like-btn-hover);
+  filter: contrast(1.5);
 }

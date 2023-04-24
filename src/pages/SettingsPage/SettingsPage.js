@@ -118,7 +118,7 @@ function SettingsPage() {
       <form onSubmit={updateBanner} className={styles.imageForm}>
         <input
           type="file"
-          placeholder="Banner"
+          placeholder={t('Banner')}
           name="banner"
           id="bannerInput"
           accept="image/*"
@@ -138,7 +138,7 @@ function SettingsPage() {
               alt="Profile banner"
             />
           ) : (
-            <p>Select image</p>
+            <p>{t('Select image')}</p>
           )}
         </label>
 

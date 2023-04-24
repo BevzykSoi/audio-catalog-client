@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import styles from './PlaylistPage.module.css';
 import * as playlistsServices from 'services/playlists.services';
@@ -14,6 +15,8 @@ function PlaylistPage() {
   const [playlist, setPlaylist] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const { t } = useTranslation();
 
   useEffect(fetchPlaylist, [playlistId]);
 
@@ -50,7 +53,7 @@ function PlaylistPage() {
 
   return (
     <Container>
-      {loading && <p>Loading...</p>}
+      {loading && <p>{t('Loading')}...</p>}
       {error && <p>{error.message}</p>}
       {playlist && (
         <>
